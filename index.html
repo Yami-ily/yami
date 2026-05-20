@@ -24,6 +24,7 @@
             justify-content: center;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
         .game-container {
@@ -91,6 +92,52 @@
             border-radius: 4px;
             font-family: monospace;
         }
+
+        /* Aesthetic Credits Corner styling */
+        .credits {
+            position: absolute;
+            bottom: 20px;
+            right: 25px;
+            text-align: right;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.35);
+            line-height: 1.5;
+            letter-spacing: 1px;
+            pointer-events: none;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+
+        .credits:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .credits-title {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            opacity: 0.6;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
+        }
+
+        .credits span {
+            display: block;
+        }
+
+        /* Adjust credits positioning on very small heights */
+        @media (max-height: 600px) {
+            .credits {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                text-align: center;
+                margin-top: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -125,6 +172,14 @@
         </div>
 
         <canvas id="game" width="400" height="400"></canvas>
+    </div>
+
+    <!-- Aesthetic Credit Display -->
+    <div class="credits">
+        <div class="credits-title">// system_creators</div>
+        <span>Peev Catalina</span>
+        <span>Vadanescu Andrei</span>
+        <span>Nasoila Irina</span>
     </div>
 
 <script>
@@ -297,7 +352,8 @@
         else if (key === "ArrowRight" && velocity.x !== -1) nextVelocity = { x: 1, y: 0 };
     });
 
-    // Initial draw to show the empty board
+    // Initialize variables first, then draw to show the initial board behind the overlay without throwing errors
+    init();
     draw();
 </script>
 
